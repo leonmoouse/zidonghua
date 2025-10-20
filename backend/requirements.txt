@@ -1,0 +1,8 @@
+fastapi
+uvicorn[standard]
+httpx
+qdrant-client
+FlagEmbedding
+numpy
+orjson
+python-dotenv
