@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light dark;
+}
+
+body {
+  @apply bg-slate-50 text-slate-900 dark:bg-slate-900 dark:text-slate-100;
+  min-height: 100vh;
+}
+
+a {
+  @apply text-primary;
+}
+
+button:disabled {
+  @apply opacity-70 cursor-not-allowed;
+}

@@ -3,14 +3,15 @@
 ## 快速上手
 
 ### 环境要求
-- Node.js >= 14.0.0
-- npm 或 yarn
+- Python 3.11+
+- Node.js >= 18（如需运行前端）
 
 ### 安装依赖
 ```bash
 # 后端
-cd backend
-npm install
+python -m venv .venv
+source .venv/bin/activate  # Windows 使用 .venv\\Scripts\\activate
+pip install -r backend/requirements.txt
 
 # 前端
 cd frontend
@@ -24,12 +25,11 @@ npm install
 ### 启动项目
 ```bash
 # 启动后端服务
-cd backend
-npm start
+uvicorn backend.main:app --reload --host 0.0.0.0 --port 7788
 
 # 启动前端服务
 cd frontend
-npm start
+npm run dev
 ```
 
 ### 项目结构
