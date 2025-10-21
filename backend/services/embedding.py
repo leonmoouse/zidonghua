@@ -45,9 +45,19 @@ class EmbeddingService:
             texts_list.extend(padding)
             batch_size = 8
         encode_batch_size = max(8, len(texts_list)) if ensure_min_batch else max(1, batch_size)
-        embeddings = self._model.encode(texts_list, batch_size=encode_batch_size)
-        embeddings = embeddings[:original_len]
-        return [np.asarray(vec, dtype=np.float32).tolist() for vec in embeddings]
+        result = self._model.encode(
+            texts_list,
+            batch_size=encode_batch_size,
+            return_dense=True,
+            return_sparse=False,
+        )
+
+        dense_vectors = result.get("dense_vecs")
+        if dense_vectors is None:
+            raise RuntimeError("BGE-M3 encode() did not return dense vectors")
+
+        dense_vectors = dense_vectors[:original_len]
+        return [np.asarray(vec, dtype=np.float32).tolist() for vec in dense_vectors]
 
 
 @lru_cache(maxsize=1)
